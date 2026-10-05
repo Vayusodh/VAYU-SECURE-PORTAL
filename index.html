@@ -596,8 +596,24 @@ background:#000;padding:60px;text-align:center;
 </div>
 
 <script>
-var DEFAULT_LOGIN_ID="owner";
-var DEFAULT_PASSWORD="Vayu@123";
+// Database of 15 Users with Individual Login IDs and Passwords
+const USERS_DATABASE = [
+  { id: "user01", password: "Vayu@Pass01", name: "Admin User" },
+  { id: "user02", password: "Vayu@Pass02", name: "Manager" },
+  { id: "user03", password: "Vayu@Pass03", name: "Engineer" },
+  { id: "user04", password: "Vayu@Pass04", name: "Technician" },
+  { id: "user05", password: "Vayu@Pass05", name: "Supervisor" },
+  { id: "user06", password: "Vayu@Pass06", name: "Analyst" },
+  { id: "user07", password: "Vayu@Pass07", name: "Coordinator" },
+  { id: "user08", password: "Vayu@Pass08", name: "Specialist" },
+  { id: "user09", password: "Vayu@Pass09", name: "Executive" },
+  { id: "user10", password: "Vayu@Pass10", name: "Lead" },
+  { id: "user11", password: "Vayu@Pass11", name: "Consultant" },
+  { id: "user12", password: "Vayu@Pass12", name: "Officer" },
+  { id: "user13", password: "Vayu@Pass13", name: "Associate" },
+  { id: "user14", password: "Vayu@Pass14", name: "Operator" },
+  { id: "user15", password: "Vayu@Pass15", name: "Assistant" }
+];
 
 document.getElementById("password").addEventListener("keyup",function(e){
 if(e.key==="Enter"){checkPassword();}
@@ -620,17 +636,22 @@ document.getElementById("errorMsg").innerHTML="Login ID and password are require
 document.getElementById("errorMsg").style.display="block";
 return;
 }
-if(loginId===DEFAULT_LOGIN_ID&&password===DEFAULT_PASSWORD){
+
+// Check against 15 users database
+var user = USERS_DATABASE.find(u => u.id.toLowerCase() === loginId && u.password === password);
+
+if(user){
 document.getElementById("errorMsg").style.display="none";
 document.getElementById("loginBox").style.display="none";
 document.getElementById("gearLoader").style.display="flex";
 setTimeout(function(){
 sessionStorage.setItem("accessGranted","yes");
+sessionStorage.setItem("currentUser",user.name);
 document.getElementById("gearLoader").style.display="none";
 document.getElementById("mainContent").style.display="block";
 },2500);
 }else{
-document.getElementById("errorMsg").innerHTML="Access denied. Invalid login ID or password.Please contact Vayu IT Team";
+document.getElementById("errorMsg").innerHTML="Access denied. Invalid login ID or password. Please contact Vayu IT Team";
 document.getElementById("errorMsg").style.display="block";
 }
 }
