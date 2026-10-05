@@ -1,2 +1,2 @@
-# vayu-internal-library
-VAYU Internal Library Website
+# vayu-internal
+VAYU Internal Website
